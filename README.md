@@ -152,3 +152,46 @@ java -cp bin app.naive.NaiveClient
 
 ### Option 3 – Run Tests
 java -cp bin:lib/junit-4.13.2.jar:lib/hamcrest-core-1.3.jar org.junit.runner.JUnitCore test.MainControllerTest
+
+## Testing
+
+The project includes **6 JUnit tests** in `MainControllerTest.java`:
+
+| Test Method | What It Verifies |
+|-------------|------------------|
+| `testLoad()` | TSV loading and expected row ordering after sorting |
+| `testGetTopLevelTasks()` | Correct extraction of tasks with `MamaId = 0` |
+| `testGetTaskByPrefix()` | Case‑insensitive prefix search (e.g., `"put"` → `"Put eggs on bread"`, `"Put bread in plate"`) |
+| `testGetTaskByPrefix2()` | Graceful handling of non‑matching prefix (`"cook"` → error message row) |
+| `testGetTaskById()` | Exact ID lookup |
+| `testGetTaskById2()` | Graceful handling of non‑existent ID (`120` → error message row) |
+
+All tests pass successfully against the `EggsScrambled.tsv` fixture.
+
+## Results & Observations
+
+- **Composite task computation** works reliably: parent tasks dynamically derive their Start, End, and Cost from children.
+- **Sorting algorithm** (manual bubble‑sort) correctly orders tasks hierarchically: top‑level tasks appear before their descendants, both sorted by Start date and then by TaskId for tie‑breaking.
+- **Filter functions** include helpful error messages when no match is found, rather than returning empty results.
+- **Report generation** automatically appends the correct file extension (`.txt`, `.md`, `.html`) if omitted by the user.
+- The **Gantt raster view** successfully maps time‑based data onto a 2D matrix suitable for visual representation in a `JTable`.
+
+## Future Improvements
+
+### Repository & Structure
+- [ ] Add `.gitignore` to exclude `bin/`, `.class`, and IDE files
+- [ ] Declare a proper Java package (e.g., `com.ganttmanager`) instead of default‑ish packages
+- [ ] Add Maven/Gradle build to manage dependencies (JUnit, etc.)
+
+### Code Quality
+- [ ] Replace raw `List` types with generics (e.g., `List<String[]>` instead of `List`)
+- [ ] Fix spelling: `"galric"` → `"garlic"`, `"Steer"` → `"Stir"`, `"mamaId"` → `"parentId"` or `"mammaId"`
+- [ ] Replace manual bubble‑sort with `Comparator` + `Collections.sort()` for clarity
+- [ ] Use `try`-with‑resources consistently for file I/O
+- [ ] Add Javadoc to all public methods
+
+### Features
+- [ ] Drag‑and‑drop task editing in the GUI
+- [ ] Export to PNG/PDF of the Gantt chart
+- [ ] Undo/redo support
+- [ ] Direct editing of task properties within the table view
