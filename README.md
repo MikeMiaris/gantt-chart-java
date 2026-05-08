@@ -7,7 +7,6 @@ A **Java-based desktop application** for loading, filtering, reporting, and visu
 ## Table of Contents
 
 - [Overview](#overview)
-- [Project Structure](#project-structure)
 - [Features](#features)
 - [Architecture & Design](#architecture--design)
 - [Key Components](#key-components)
