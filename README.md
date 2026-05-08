@@ -1,6 +1,6 @@
 # Gantt Manager – Java Swing Application
 
-A **Java-based desktop application** for loading, filtering, reporting, and visualising Gantt chart project data. Built as a group project (**Dimos Apostolidis 4633, Ilias Georgiadis 4645, Michalis Miaris 4735**) for the academic year 2022‑23.
+A **Java-based desktop application** for loading, filtering, reporting, and visualising Gantt chart project data. Built as a group project for the academic year 2022‑23.
 
 ---
 
